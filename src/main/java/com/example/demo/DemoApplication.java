@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.SpringVersion;
 
 
-// @SpringBootApplication은 
-// @Configuration, @EnableAutoConfiguration, @ComponentScan
-//
+// @SpringBootApplication은 @Configuration, @EnableAutoConfiguration, @ComponentScan 으로 구성
 @SpringBootApplication
 public class DemoApplication {
 

@@ -12,13 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DemoApplicationTests {
 	
 	 @Autowired
-	 @Qualifier("helloWorld")
-	 private String s;
+	 @Qualifier("helloWorldService")
+	 private IHelloWorldService helloWorld;
 	
 	 
 	@Test
 	void contextLoads() {
-		assertThat(s).isEqualTo("Hello, World! from helloWorld bean");
+		assertThat(helloWorld.sayHello()).isEqualTo("Hello, World! from HelloWorldService bean");
 		 
 	}
 
