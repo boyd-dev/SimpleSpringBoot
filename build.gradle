@@ -1,0 +1,33 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+// 스프링 부트에서는 Jar 태스크는 bootJar
+bootJar {    
+    archiveFileName = 'demo-app-0.0.1.jar'        
+}
+
+test {
+	useJUnitPlatform()
+}
+
+
+//defaultTasks 'clean', 'bootJar'
+
+
