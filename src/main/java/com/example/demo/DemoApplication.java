@@ -8,7 +8,7 @@ import org.springframework.core.SpringVersion;
 
 
 // @SpringBootApplication은 
-// @Configuration, @EnableAutoConfiguration, @ComponentScan을 설정한 것과 동일
+// @Configuration, @EnableAutoConfiguration, @ComponentScan
 //
 @SpringBootApplication
 public class DemoApplication {
