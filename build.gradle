@@ -26,7 +26,12 @@ bootJar {
 
 test {
 	useJUnitPlatform()
+	testLogging {
+	    showStackTraces = true
+	    exceptionFormat = 'full'
+	}
 }
+
 
 
 //defaultTasks 'clean', 'bootJar'
