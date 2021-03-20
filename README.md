@@ -34,14 +34,14 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
    구현체들을 제공한다. 예를 들어서 BeanFactory의 구현체 중 하나인 `DefaultListableBeanFactory`를 사용하여 컨테이너를 만들 수 있다.
 
    ```
-   public void someMethod() {
-      DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
-      BeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
-      reader.loadBeanDefinitions(new FileSystemResource("src/main/resources/ioc.xml"));
+   
+     DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+     BeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+     reader.loadBeanDefinitions(new FileSystemResource("src/main/resources/ioc.xml"));
 
-      FooMaker maker = (FooMaker) factory.getBean("fooMaker"); 
-      maker.do();
-   }
+     FooMaker maker = (FooMaker) factory.getBean("fooMaker"); 
+     maker.do();
+   
    ```
    `ioc.xml`은 다음과 같이 xml 방식으로 빈을 정의한 파일이다. 객체 생성을 직접하지 않고 단지 컨테이너에서 호출해서 쓸 수 있게 된다.
 
