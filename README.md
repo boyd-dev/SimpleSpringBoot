@@ -33,8 +33,7 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
    스프링 프레임워크가 제공하는 IoC 컨테이너는 크게 BeanFactory와 ApplicationContext로 구분할 수 있다. 스프링은 이 두 개의 인터페이스를 구현한 다수의 
    구현체들을 제공한다. 예를 들어서 BeanFactory의 구현체 중 하나인 `DefaultListableBeanFactory`를 사용하여 컨테이너를 만들 수 있다.
 
-   ```
-   
+   ```   
      DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
      BeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
      reader.loadBeanDefinitions(new FileSystemResource("src/main/resources/ioc.xml"));
