@@ -19,7 +19,7 @@ IoC와 동일한 개념으로 사용한다.
    반면에 스프링에서는 객체 생성이 외부에서 이루어지고 객체 생성과 객체간 의존성 관리를 담당하는 "컨테이너"를 제공한다. 그래서 스프링에서는 
 생성된 객체들을 다음과 같이 사용하면 된다.
    ```
-   @Autowire
+   @Autowired
    private Bar bar;
 
    ```
@@ -83,8 +83,8 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
    
    스프링 부트 애플리케이션이 실행되면 자동으로 기본적인 설정이 적용되고 ApplicationContext가 만들어지면서 정의된 빈들을 로드한다. 
    
-   또 개발자가 여러 의존성 라이브러리들을 찾아서 버전에 맞게 구성해주는 수고를 덜어주기 위해 다양한 Starter 패키지들이 제공된다. 예를 들어 스프링 MVC 관련된 패키지들을 
-   받기 위해서 관련된 여러 패키지들을 직접 찾는 것이 아니라 `spring-boot-starter-web`만 설치하면 된다.
+   또 개발자가 여러 의존성 라이브러리들을 찾아서 버전에 맞게 설정해주는 수고를 덜어주기 위해 다양한 Starter 패키지들을 제공한다. 예를 들어 스프링 MVC 관련된 패키지들을 
+   받기 위해서 관련된 여러 패키지들을 직접 찾아서 추가하는 것이 아니라 `spring-boot-starter-web`만 설치하면 된다.
    
    Starter 리스트는 [여기](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter)를 참조
    
