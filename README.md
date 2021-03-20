@@ -87,7 +87,7 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
    또 개발자가 여러 의존성 라이브러리들을 찾아서 버전에 맞게 구성해주는 수고를 덜어주기 위해 다양한 Starter 패키지들이 제공된다. 예를 들어 웹 애플리케이션 개발을 스프링 MVC 관련된 패키지들을 
    받기 위해서 관련된 여러 패키지들을 직접 찾는 것이 아니라 `spring-boot-starter-web`만 설치하면 된다.
    
-   Starter 리스트는 다음 링크를 참조<br/>
-   [Starters](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter)
+   Starter 리스트는 [여기](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter)를 참조
+   
    
    
