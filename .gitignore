@@ -14,3 +14,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+
+.README.md.html
+

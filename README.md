@@ -23,5 +23,63 @@ Bar bar = new Bar();
 private Bar bar;
 
 ```
-스프링에서는 애플리케이션을 구성하는 객체들을 "빈(bean)"이라고 하는데 그래서 스프링은 "빈 컨테이너"를 통해 의존성을 관리해주는 프레임워크라고 말할 수 있다. 
+스프링에서는 애플리케이션을 구성하는 객체들을 "빈(bean)"이라고 하는데 그래서 스프링은 "IoC 컨테이너"를 통해 의존성을 관리해주는 프레임워크라고 말할 수 있다. 컨테이너가 의존성과 객체 생성을 
+담당하려면 xml 방식으로 설정 파일을 작성하거나 JavaConfig를 사용하여 빈을 정의해주어야 한다. 
+
+>왜 빈(bean)이라고 할까?<br/>
+The motivation for using the name 'bean', as opposed to 'component' or 'object' is rooted in the origins of the Spring Framework itself (it arose partly as a response to the complexity of Enterprise JavaBeans).
+   
+* 스프링에서 제공하는 IoC 컨테이너  
+   스프링 프레임워크가 제공하는 IoC 컨테이너는 크게 BeanFactory와 ApplicationContext로 구분할 수 있다. 스프링은 이 두 개의 인터페이스를 구현한 다수의 
+   구현체들을 제공한다. 예를 들어서 BeanFactory의 구현체 중 하나인 DefaultListableBeanFactory를 사용하여 컨테이너를 생성할 수 있다.
+
+   ```
+   public void someMethod() {
+
+    DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+    BeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+    reader.loadBeanDefinitions(new FileSystemResource("src/main/resources/ioc.xml"));
+
+    FooMaker maker = (FooMaker) factory.getBean("fooMaker"); 
+    maker.do();
+   }
+   ```
+   `ioc.xml`은 다음과 같이 xml 방식으로 빈을 정의한 파일이다. 객체 생성을 직접하지 않고 단지 컨테이너에서 호출해서 쓸 수 있게 된다.
+
+   ```
+   <?xml version="1.0" encoding="UTF-8"?>
+   <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+      <bean id="fooMaker" class="edu.study.examples.FooMaker"/>
+   </beans>
+   ```
+   
+* ApplicationContext  
+   ApplicationContext는 BeanFactory보다 더 많은 기능들을 제공하는 인터페이스이다.  
+   
+   스프링 웹 애플리케이션(스프링 MVC)에서 사용하는 WebApplicationContext도 ApplicationContext를 확장한 것이다. 웹 애플리케이션은 톰캣과 같은 서버(서블릿 컨테이너라고도 한다)에 의해 구동되므로 서버의 ContextLoaderListener를 통해 ApplicationContext을 서버에 로드한다.
+   
+* 스프링 부트  
+   스프링 설정은 반복적이고 복잡해서 번거로운 부분이 많이 있다. 이러한 부분을 자동화하고 비지니스 로직에 집중할 수 있도록 만든 것이 스프링 부트이다. 
+   
+   스프링 부트는 `@SpringBootApplication`에서 여러 가지 설정을 자동으로 잡아주고 `SpringApplication.run`은 ApplicationContext를 생성한다.
+   다음은 스프링 부트 기본 실행코드이다. 
+   
+   ```
+   @SpringBootApplication
+   public class DemoApplication {
+
+      public static void main(String[] args) {
+          ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
+        
+          IHelloWorldService hsb = (IHelloWorldService) ctx.getBean("helloWorldService");
+          String str = hsb.sayHello();        
+          System.out.println(str);        
+      }
+   
+   }
+   ```
    

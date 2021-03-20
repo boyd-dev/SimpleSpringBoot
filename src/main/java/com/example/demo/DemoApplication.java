@@ -22,6 +22,7 @@ public class DemoApplication {
 		
 		//String str = (String) ctx.getBean("helloWorld");
 		
+		//
 		IHelloWorldService hsb = (IHelloWorldService) ctx.getBean("helloWorldService");
 		String str = hsb.sayHello();
 		

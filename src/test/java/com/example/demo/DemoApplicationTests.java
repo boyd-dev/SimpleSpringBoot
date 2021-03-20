@@ -18,7 +18,7 @@ class DemoApplicationTests {
 	 
 	@Test
 	void contextLoads() {
-		assertThat(helloWorld.sayHello()).isEqualTo("Hello, World! from HelloWorldService bean");
+		assertThat(helloWorld.sayHello()).isEqualTo("Hey, World!! from HelloWorldService bean");
 		 
 	}
 

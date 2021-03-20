@@ -7,7 +7,7 @@ public class HelloWorldService implements IHelloWorldService {
 
 	@Override
 	public String sayHello() {
-		return "Hello, World! from HelloWorldService bean";
+		return "Hey, World! from HelloWorldService bean";
 	}
 	
 
