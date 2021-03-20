@@ -42,7 +42,7 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
      maker.do();
    
    ```
-   `ioc.xml`은 다음과 같이 xml 방식으로 빈을 정의한 파일이다. 객체 생성을 직접하지 않고 단지 컨테이너에서 호출해서 쓸 수 있게 된다.
+   `ioc.xml`은 다음과 같이 xml 방식으로 빈을 정의한 파일이다. 객체 생성을 직접하지 않고 컨테이너에서 호출하거나 "주입"을 받아서 쓸 수 있게 된다.
 
    ```
    <?xml version="1.0" encoding="UTF-8"?>
