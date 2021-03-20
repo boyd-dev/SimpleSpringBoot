@@ -60,7 +60,8 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
 * ApplicationContext  
    ApplicationContext는 BeanFactory보다 더 많은 기능들을 제공하는 인터페이스이다.  
    
-   스프링 웹 애플리케이션(스프링 MVC)에서 사용하는 WebApplicationContext도 ApplicationContext를 확장한 것이다. 웹 애플리케이션은 톰캣과 같은 서버(서블릿 컨테이너라고도 한다)에 의해 구동되므로 서버의 ContextLoaderListener를 통해 ApplicationContext을 서버에 로드한다.
+   스프링 웹 애플리케이션(스프링 MVC)에서 사용하는 WebApplicationContext도 ApplicationContext를 확장한 것이다. 웹 애플리케이션은 톰캣과 같은 서버(서블릿 컨테이너라고도 한다)에 의해 구동되므로 
+   ContextLoaderListener를 통해 ApplicationContext을 서버에 로드한다. 스프링의 ContextLoaderListener는 자바의 웹 애플리케이션 스펙에 있는 javax.servlet.ServletContextListener의 구현체이다.
    
 * 스프링 부트  
    스프링 설정은 반복적이고 복잡해서 번거로운 부분이 많이 있다. 이러한 부분을 자동화하고 비지니스 로직에 집중할 수 있도록 만든 것이 스프링 부트이다. 
