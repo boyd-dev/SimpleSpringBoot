@@ -23,8 +23,8 @@ IoC와 동일한 개념으로 사용한다.
    private Bar bar;
 
    ```
-   스프링에서는 애플리케이션을 구성하는 객체들을 "빈(bean)"이라고 하는데 프레임워크에서 "빈(bean) 컨테이너"를 제공하면서 의존성을 관리해준다고 말할 수 있다. 컨테이너가 객체 생성과 
-   의존성 규칙을 정의하려면 xml 또는 JavaConfig를 사용하여 빈을 정의해주어야 한다. 
+   스프링에서는 애플리케이션을 구성하는 객체들을 "빈(bean)"이라고 하는데 프레임워크에서 "빈(bean) 컨테이너"를 제공하면서 의존성을 관리해준다고 말할 수 있다. 컨테이너에 객체 생성과 
+   의존성 규칙을 적용하려면 xml 또는 JavaConfig를 사용하여 빈을 정의해주어야 한다. 
 
 >왜 빈(bean)이라고 할까?<br/>
 The motivation for using the name 'bean', as opposed to 'component' or 'object' is rooted in the origins of the Spring Framework itself (it arose partly as a response to the complexity of Enterprise JavaBeans).
