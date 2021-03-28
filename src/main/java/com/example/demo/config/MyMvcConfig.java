@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class MyMvcConfig implements WebMvcConfigurer {
 	
-
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {	
 		registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/static/");		
@@ -30,7 +29,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	// 컨트롤러 작성 없이(모델 없이, 아마도 정적 리소스들) 특정 뷰로 이동하기 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index.html");		
+		registry.addViewController("/").setViewName("hello.html");		
 	}
 	
 	
@@ -43,9 +42,5 @@ public class MyMvcConfig implements WebMvcConfigurer {
 		resolver.setViewNames(new String[] {"*.htm", "*.html"}); //뷰 페이지의 페턴을 줄 수도 있다.
 		return resolver;
 	}
-
-	
-	
-	
 	  
 }

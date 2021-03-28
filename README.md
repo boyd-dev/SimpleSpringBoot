@@ -85,7 +85,7 @@ spring-webmvc.jar 같은 의존성 라이브러리들이 포함되고 별도로 
 
    ```
    <servlet>
-        <servlet-name>appServlet</servlet-name>
+        <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>        
         <load-on-startup>1</load-on-startup>
    </servlet>
@@ -97,5 +97,21 @@ spring-webmvc.jar 같은 의존성 라이브러리들이 포함되고 별도로 
    스프링 부트에서는 핸들러 매핑 인터페이스의 디폴트 구현체로 `RequestMappingHandlerMapping`이 설정되어 있습니다. 컨트롤러 클래스의 메소드에 `@RequestMapping`를 붙여서 요청을 처리하게 됩니다. 최종적인 화면을 만들어주는 
    뷰 리졸버는 `InternalResourceViewResolver`입니다. 
    
+   MVC와 관련된 기본 설정은 `spring-boot-starter-web`이 추가되었을 때 적용되는 것이고 만약에 사용자 설정을 적용하기 위해서는 `WebMvcConfigurer`라는 인터페이스를 구현해야 합니다.  
+   
+   기본 설정을 어느 정도 유지하기 위해서는 `@EnableWebMvc`를 붙여주게 됩니다. MVC 설정은 복잡하기도 하고 번거롭기 때문에 관례적으로, 흔히 사용되는 설정을 자동으로 적용하도록 되어 있습니다.
+   이런 패턴을 "Convention over Configuration" 이라고 합니다. 모든 설정을 개발자가 처음부터 하는 것이 아니라 일반적은 설정을 적용하고 필요에 의해 사용자 설정을 할 수 있도록 하는 것입니다.
+   
+   ```
+   @Configuration
+   @EnableWebMvc
+   public class MyMvcConfig implements WebMvcConfigurer {
+      
+       @override
+       ...
+   }
+   ```
+   그런데 기본 설정을 override하는 경우에는 일부 기본 설정이 사라지기 때문에 WebMvcConfigurer 구현시 최소한의 설정을 작성해주어야 합니다(아마도 WebMvcConfigurer 인터페이스에 구현된 default 메소드가 없는 경우). 예를 들어 defaultViewResolver는 
+   `InternalResourceViewResolver`이지만 WebMvcConfigurer의 구현체를 만들게 되면 defaultViewResolver가 등록되지 않으므로 꼭 작성해주어야 합니다.
    
    
