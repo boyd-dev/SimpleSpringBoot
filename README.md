@@ -47,7 +47,7 @@
    이런 필터들을 커스터마이징하지 않는다면 모든 필터들이 적용되고 필터의 동작에 의해 통과되지 못하는 요청은 처리되지 않게 되는 것입니다. 
    공식 [문서](https://docs.spring.io/spring-security/site/docs/current/reference/html5/)의 그림을 보면 이해하는데 도움이 될 것 같습니다.
    
-   <img src="https://github.com/kate-foo/SpringBootWeb/blob/main/sec-chain.PNG"/>
+   <img src="https://github.com/kate-foo/SimpleSpringBoot/blob/main/sec-chain.PNG"/>
    
 * WebSecurityConfigurerAdapter  
 Security의 기본 설정을 하려면 `WebSecurityConfigurerAdapter`를 상속받고 `@EnableWebSecurity`을 사용합니다.
@@ -92,7 +92,7 @@ spring-webmvc.jar 같은 의존성 라이브러리들이 포함되고 별도로 
    ```    
    MVC 흐름을 간단히 나타내면 다음과 같습니다.
    
-   <img src="https://github.com/kate-foo/SpringBootWeb/blob/main/spring-mvc.PNG"/>
+   <img src="https://github.com/kate-foo/SimpleSpringBoot/blob/main/spring-mvc.PNG"/>
    
    스프링 부트에서는 핸들러 매핑 인터페이스의 디폴트 구현체로 `RequestMappingHandlerMapping`이 설정되어 있습니다. 컨트롤러 클래스의 메소드에 `@RequestMapping`를 붙여서 요청을 처리하게 됩니다. 최종적인 화면을 만들어주는 
    뷰 리졸버는 `InternalResourceViewResolver`입니다. 
