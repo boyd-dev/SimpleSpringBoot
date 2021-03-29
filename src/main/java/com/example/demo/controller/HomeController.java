@@ -9,7 +9,7 @@ public class HomeController {
 
 	@RequestMapping(value="/main.do")
     public String mainPage(Model model) {
-		
+				
 		return "main.html";
     }
 

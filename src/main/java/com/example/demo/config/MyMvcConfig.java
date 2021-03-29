@@ -14,7 +14,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {	
-		registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/static/");		
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");		
 	}
 
 	// 스프링 부트 2.4 이후부터 스프링 부트에 내장된 톰캣(embedded tomcat)에 디폴트 서블릿이 자동으로 등록되지 않는다. 
