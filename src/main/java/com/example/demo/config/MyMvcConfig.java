@@ -29,7 +29,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	// 컨트롤러 작성 없이(모델 없이, 아마도 정적 리소스들) 특정 뷰로 이동하기 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("hello.html");		
+		registry.addViewController("/").setViewName("index.html");		
 	}
 	
 	
@@ -38,7 +38,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/resources/"); //실제 물리적인 경로명이 아니라 URL기준으로 만들어지는 경로명 
+		//resolver.setPrefix("/"); //실제 물리적인 경로명이 아니라 URL기준으로 만들어지는 경로명 
 		resolver.setViewNames(new String[] {"*.htm", "*.html"}); //뷰 페이지의 페턴을 줄 수도 있다.
 		return resolver;
 	}

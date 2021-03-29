@@ -2,11 +2,14 @@ plugins {
     id 'org.springframework.boot' version '2.4.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'com.github.node-gradle.node' version '3.0.1'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+
 
 repositories {
     mavenCentral()
@@ -22,3 +25,26 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+
+// 프론트엔드 애플리케이션 프로젝트의 경로
+def frontendDir = "C:/Users/song/myapp"
+
+// 빌드된 프론트엔드 애플리케이션을 스프링 부트 정적 리소스 디렉토리로 복사
+task copyFrontend(type: Copy) {
+    from "$frontendDir/build"
+    into "$projectDir/src/main/resources/static"       
+}
+
+// node-gradle 플러그인이 제공하는 yarn_build 태스크를 실행하고 copyFrontend 태스크를 그 다음에 실행
+copyFrontend.dependsOn(yarn_build)
+
+// copyFrontend 태스트가 실행된 다음에 자바 소스를 컴파일
+compileJava.dependsOn(copyFrontend)
+
+// node-gradle 플러그인 설정 
+node {
+    nodeProjectDir = file("$frontendDir")
+}
+
+
