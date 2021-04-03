@@ -19,16 +19,36 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		 .authorizeRequests()
 		     // 첫번째로 만나는 패턴이 일치하면 적용된다.
 		     //.antMatchers("/resources/**").permitAll()
+		     .antMatchers("/").permitAll()
+		     .antMatchers("/static/**").permitAll()
+		     .antMatchers("/oauth2Login").permitAll()
 		     .anyRequest().authenticated()
 		     .and()
-         .formLogin()
-             .defaultSuccessUrl("/main.do", false); // 로그인 성공 후 이동하는 곳 true=성공하면 항상 정해진 페이지로 이동. false=처음 요청을 처리
-		
+		     .csrf().disable() // 활성화하면 로그아웃시 POST 메소드로 해야 한다!
+		 .oauth2Login()  // http://localhost:8080/login 이면 디폴트 로그인 화면 표시
+		     .loginPage("/oauth2Login")		     
+		     //.successHandler(null)
+		     .redirectionEndpoint()
+		         .baseUri("/oauth2/callback/*") // 디폴트는 login/oauth2/code/*
+		         .and()
+		     .defaultSuccessUrl("/main.do", true)
+		     //.failureUrl("/main.do")		     
+		     .and()		      
+		  .logout()
+		     //.clearAuthentication(true)
+		     .deleteCookies("JSESSIONID")
+		     //.invalidateHttpSession(true) 
+		     .and()
+		  // 이렇게 하면 로그인 페이지가 나오지 않고 401이 리턴된다.   
+		  //.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+		     ;		     
 	}
+	
+	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
+				
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();		
 		auth.inMemoryAuthentication()
 		    .withUser("user")

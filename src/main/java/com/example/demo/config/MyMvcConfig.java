@@ -38,9 +38,20 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		//resolver.setPrefix("/"); //실제 물리적인 경로명이 아니라 URL기준으로 만들어지는 경로명 
+		//resolver.setPrefix("/resources/"); //실제 물리적인 경로명이 아니라 URL기준으로 만들어지는 경로명 
 		resolver.setViewNames(new String[] {"*.htm", "*.html"}); //뷰 페이지의 페턴을 줄 수도 있다.
 		return resolver;
 	}
 	  
+	
+	// 스프링 부트에서 서블릿 등록하기
+	// ServletRegistrationBean을 등록
+//	@Bean
+//	public ServletRegistrationBean<LoginServlet> servletRegistrationBean(){
+//		ServletRegistrationBean<LoginServlet> bean = new ServletRegistrationBean<>(new LoginServlet());
+//		bean.addUrlMappings("/socialLogin");
+//		return bean;
+//	}
+	
+	
 }
