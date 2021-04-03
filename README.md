@@ -55,9 +55,35 @@
   
 * Spring Boot OAuth2    
   
-  스프링 부트는 이러한 복잡한 상황을 간단하게 해결해 주는 스타터 라이브러리가 있습니다. 그래서 스타터만 추가하면 OAuth2 클라리언트 기능을 쉽게 추가할 수 있게 됩니다.  
+  스프링 부트는 이러한 복잡한 상황을 간단하게 해결해 주는 스타터 라이브러리가 있습니다. 그래서 스타터만 추가하면 OAuth2 클라이언트 기능을 쉽게 추가할 수 있게 됩니다.  
 
    ```
    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
    ```
+   
+   Security의 기본 로그인 폼을 OAuth2로 바꾸려면 다음과 같이 설정할 수 있습니다. 기본 로그인 페이지는 `/login`이지만 여기서는 `/oauth2Login`으로 변경하였습니다.
+   
+   ```
+   public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+
+     @Override
+     protected void configure(HttpSecurity http) throws Exception {  
+   
+        http
+           .authorizeRequests()
+             .antMatchers("/").permitAll()
+             .antMatchers("/oauth2Login").permitAll()
+             .anyRequest().authenticated()
+             .and()
+             .csrf().disable()
+           .oauth2Login()
+             .loginPage("/oauth2Login")          
+             .defaultSuccessUrl("/main.do", true)
+             .and()           
+           .logout()
+             .deleteCookies("JSESSIONID"); 
+             
+      ...        
+   ``` 
+   
     
