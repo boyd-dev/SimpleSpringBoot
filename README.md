@@ -46,7 +46,7 @@
   
   [https://projects.spring.io/spring-security-oauth/docs/Home.html](https://projects.spring.io/spring-security-oauth/docs/Home.html)
 
-  여러 레포와 자료들이 이전 라이브러리들을 기반으로 작성되어 있어서 혼란스러운 부분들이 있을 것 같습니다. 예를 들어 관련된 어노테이션이나 클래스를 사용하면 다음과 같이 deprecated 되었다는 사실을 
+  여러 레포와 자료들이 이전 라이브러리들을 기반으로 작성되어 있어서 혼란스러운 부분들이 있을 것 같습니다. 예를 들어 다음 어노테이션이나 클래스를 사용하면 다음과 같이 deprecated 되었다는 사실을 
   알 수 있습니다.
   
   ~~@EnableOAuth2Client~~  
