@@ -115,8 +115,7 @@
    이 플러그인에서 제공하는 npm 또는 yarn 태스크를 사용하여 프론트엔드 애플리케이션을 빌드할 수 있습니다. 빌드 결과물(chunk)을 스프링 부트 정적 리소스 디렉토리로 복사해주는 태스크도 
    추가해주면 백엔드와 함께 패키징될 수 있습니다.
    
-   ```
-   
+   ```   
    def frontendDir = "C:/Users/kate-foo/myapp"
 
    task copyFrontend(type: Copy) {
