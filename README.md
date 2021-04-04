@@ -88,7 +88,9 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
    
    Starter 리스트는 [여기](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-starter)를 참조하면 됩니다.
    
-   스프링 부트 웹 애플리케이션은 [webapp](https://github.com/kate-foo/SimpleSpringBoot/tree/webapp) 브랜치에서 살펴보겠습니다. 
+* 다른 브랜치     
+   - 스프링 부트 웹 애플리케이션 [webapp](https://github.com/kate-foo/SimpleSpringBoot/tree/webapp)  
+   - 스프링 부트 OAuth2 적용 [oauth2](https://github.com/kate-foo/SimpleSpringBoot/tree/oauth2)
    
    
    
