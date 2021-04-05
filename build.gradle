@@ -18,15 +18,29 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security:2.4.4'
+    /*
+    implementation ('org.springframework.boot:spring-boot-starter-web:2.4.4') {
+        exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging' 
+    } 
+    */   
     implementation 'org.springframework.boot:spring-boot-starter-web:2.4.4'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.4.4'
+    // 스프링 부트 디폴트인 logback 대신에 log4j2를 사용하기로 함
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 }
 
+
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'    
+}
+
+
 test {
     useJUnitPlatform()
 }
+
 
 
 // 프론트엔드 애플리케이션 프로젝트의 경로
@@ -48,5 +62,4 @@ compileJava.dependsOn(copyFrontend)
 node {
     nodeProjectDir = file("$frontendDir")
 }
-
 
