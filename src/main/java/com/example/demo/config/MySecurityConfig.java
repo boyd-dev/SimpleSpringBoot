@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import com.example.demo.login.OAuth2UserAttribute;
+
 @Configuration
 @EnableWebSecurity(debug=false)
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,16 +24,14 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		 http
 		 .authorizeRequests()
 		     // 첫번째로 만나는 패턴이 일치하면 적용된다.
-		     //.antMatchers("/resources/**").permitAll()
-		     .antMatchers("/").permitAll()
-		     .antMatchers("/static/**").permitAll()
+		     .antMatchers("/index.html").permitAll()
+		     .antMatchers("/static/**").permitAll() // 리액트 애플리케이션에도 static 폴더가 생기므로 허용한다.
 		     .antMatchers("/oauth2Login").permitAll()
 		     .anyRequest().authenticated()
 		     .and()
 		     .csrf().disable() // 활성화하면 로그아웃시 POST 메소드로 해야 한다!
 		 .oauth2Login()  // http://localhost:8080/login 이면 디폴트 로그인 화면 표시
 		    .loginPage("/oauth2Login")		     
-		       //.successHandler(null)
 		       .redirectionEndpoint()
 		          .baseUri("/oauth2/callback/*") // 디폴트는 login/oauth2/code/*
 		          .and()
@@ -44,13 +44,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		       //.clearAuthentication(true)
 		       .deleteCookies("JSESSIONID")
 		       //.invalidateHttpSession(true) 
-		       .and()
-		    
-		    
-		  
-		  // 이렇게 하면 로그인 페이지가 나오지 않고 401이 리턴된다.   
-		  //.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-		     ;		     
+		       .and();		     
 	}
 	
 	
@@ -69,6 +63,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		return new CustomOAuth2UserService();
 	}
 
+	
+	@Bean
+	public OAuth2UserAttribute oauth2UserAttribute() {		
+		return new OAuth2UserAttribute();
+	}
 	
 	
 

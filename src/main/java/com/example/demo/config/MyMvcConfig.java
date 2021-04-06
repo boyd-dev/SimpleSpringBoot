@@ -12,25 +12,26 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class MyMvcConfig implements WebMvcConfigurer {
 	
+	
+	// 정적 리소스는 보통 제한없이(로그인이 필요없는) 서비스되도록 설정한다.
+	// 정적 리소스의 디폴트 루트는 /resources/static이다. 
+	// 예를 들어 /resources/static/main.html은 http://localhost:8080/main.html으로 볼 수 있다.
+	// 시큐리티가 적용되면 필터에 의해 모두 차단되므로 필터 예외 설정을 해주어야 한다.
+	// .antMatchers("/static/**").permitAll()
+
+	// 요청된 URL 경로와 물리적인 저장 경로를 매핑하는 역할
+	// TODO 명확한 의미는 아직?
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {	
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");		
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");	
 	}
-
-	// 스프링 부트 2.4 이후부터 스프링 부트에 내장된 톰캣(embedded tomcat)에 디폴트 서블릿이 자동으로 등록되지 않는다. 
-	// 디폴트 서블릿을 등록하려면 application.properties 파일에 server.servlet.register-default-servlet=true 을 설정한다.
-	// 다음 설정은 war로 패키징하고 외부 톰캣에 배포할 때만 적용될 수 있을 것 같다.
-	//  
-	//@Override
-//	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-//		configurer.enable();		
-//	}
+	
 		
 	// 컨트롤러 작성 없이(모델 없이, 아마도 정적 리소스들) 특정 뷰로 이동하기 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index.html");		
-	}
+//	@Override
+//	public void addViewControllers(ViewControllerRegistry registry) {
+//		registry.addViewController("/").setViewName("index.html");		
+//	}
 	
 	
 	// 원래는 JSP와 같은 뷰 처리를 지원하기 위해 설정하지만 스프링 부트에서는 JSP를 권장하지 않는다.
@@ -38,8 +39,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		//resolver.setPrefix("/resources/"); //실제 물리적인 경로명이 아니라 URL기준으로 만들어지는 경로명 
-		resolver.setViewNames(new String[] {"*.htm", "*.html"}); //뷰 페이지의 페턴을 줄 수도 있다.
+		resolver.setViewNames(new String[] {"*.htm", "*.html"}); //뷰 페이지의 패턴을 제한
 		return resolver;
 	}
 	  

@@ -8,7 +8,7 @@
 
   <Loggers>
   
-      <Logger name="com.example.demo.controller" level="debug" additivity="true"/>
+      <Logger name="com.example.demo" level="debug" additivity="true"/>
   
       <Root level="info">
           <AppenderRef ref="Console"/>

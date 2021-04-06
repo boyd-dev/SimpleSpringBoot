@@ -15,7 +15,7 @@ spring:
                   client-name: google                           
                naver:
                   client-id: LSB9C9lp5mhsmE4sXORv
-                  client-secret: dEmml1QMIh 
+                  client-secret: dEmml1QMIh
                   redirect-uri: http://localhost:8080/oauth2/callback/naver
                   authorization-grant-type: authorization_code
                   client-name: naver

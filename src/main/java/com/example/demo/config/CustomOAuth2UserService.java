@@ -1,12 +1,12 @@
 package com.example.demo.config;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,11 +25,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.controller.HomeController;
+import com.example.demo.login.OAuth2UserAttribute;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService 를 참조하여 작성
@@ -43,35 +41,35 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 	private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
 	
 	// 사용자 정보는 이 세가지 정보만 참조하기로 한다.
-	private static final String USER_ID = "userId";
-	private static final String USER_NAME = "userName";
-	private static final String USER_EMAIL = "userEmail";
-
+	// key 값
+	//private static final String USER_ID = "userId";
+	
+	@Autowired
+	private OAuth2UserAttribute oauth2UserAttribute;
 	
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {	
 		
 		String clientRegistrationId = userRequest.getClientRegistration().getRegistrationId();
 		String resourceServerUri = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri();
-		String accessToken = userRequest.getAccessToken().getTokenValue();		
+		String accessToken = userRequest.getAccessToken().getTokenValue();
 
 //		if (logger.isDebugEnabled()) {
 //			logger.debug(accessToken);
 //		}	
 		
-		OAuth2User user = null;
-		
+		OAuth2User user = null;		
 		
 		//TODO 시큐리티에서 제공하는 기본 권한 형식은 ROLE_XXX
 		// 인증에 성공한 사용자는 ROLE_USER 권한을 부여하기로 하자.
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		
-		Map<String, Object> attributes = null;
-		
 		//사용자 정보 중 사용자 아이디로 삼을 key
-		String userNameAttributeName = USER_ID;
+		String userNameAttributeName = OAuth2UserAttribute.USER_ID;
 		
+
+		Map<String, Object> attributes = null;
 				
 		if (resourceServerUri != null && !"".equals(resourceServerUri) 
 				&& accessToken != null && !"".equals(accessToken)) {
@@ -80,6 +78,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 			headers.set("Authorization", "Bearer " + accessToken);
 
+			// 헤더에만 접근 코드를 넣어서 전송하므로 파라미터로 넘길 값은 없다.
 			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 			
 			HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
@@ -87,37 +86,15 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 			restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());			
 			
 			try {
-								
+				
+				// 리소스 서버에게 사용자 정보 요청
 				String response = restTemplate.postForObject(resourceServerUri, request, String.class);				
 				
-//				if (logger.isDebugEnabled()) {
-//					logger.debug(response);
-//				}
-				
-				// 사용자 속성을 새로 구성해본다.
-				attributes = new HashMap<>();
-				if ("naver".equals(clientRegistrationId)) {
-					
-					JsonNode node = new ObjectMapper().readTree(response);					
-					
-					attributes.put(USER_ID, node.get("response").get("id"));
-					attributes.put(USER_NAME, ""); //TODO 네이버는 이름이 전달되지 않는다?
-					attributes.put(USER_EMAIL, node.get("response").get("email"));
-					
-				} else if ("google".equals(clientRegistrationId)){
-					
-					ObjectMapper mapper = new ObjectMapper();
-					Map<String, String> responseMap = mapper.readValue(response, new TypeReference<Map<String, String>>() {});
-					
-					attributes.put(USER_ID, responseMap.get("sub"));
-					attributes.put(USER_NAME, responseMap.get("family_name") + " " + responseMap.get("given_name"));
-					attributes.put(USER_EMAIL, responseMap.get("email"));				
-				}				
-				
 				if (logger.isDebugEnabled()) {
-					logger.debug(attributes.toString());
+					logger.debug(response);
 				}
 				
+				attributes = oauth2UserAttribute.getOAuth2UserAttributes(clientRegistrationId, response);
 				
 			} catch (OAuth2AuthorizationException ex) {				
 				OAuth2Error oauth2Error = ex.getError();
