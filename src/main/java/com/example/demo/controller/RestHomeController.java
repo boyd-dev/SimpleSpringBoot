@@ -6,18 +6,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class RestHomeController {
 	
-	@GetMapping(value="/test/{value}")
-    public void test(@PathVariable String value, HttpServletResponse resp) throws IOException {
+	//API 호출 테스트
+	@PostMapping(value="/api/hello/{value}")
+    public ResponseEntity<String> test(@PathVariable String value, HttpServletResponse resp) throws IOException {
 
-		System.out.println(this.getClass().getName() + "=" + value);
+		System.out.println(this.getClass().getName() + "=" + value);		
+		return ResponseEntity.ok(this.getClass().getName() + "=" + value);
     }
 
 	

@@ -1,10 +1,11 @@
-package com.example.demo.login;
+package com.example.demo.config;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Component
 public class OAuth2UserAttribute {
 	
 	private static final Logger logger = LogManager.getLogger(OAuth2UserAttribute.class);
@@ -27,11 +29,17 @@ public class OAuth2UserAttribute {
 		
 		Map<String, Object> attributes = new HashMap<>();
 		
-		if ("naver".equals(registrationId)) {
+		if ("naver".equals(registrationId)){
 			
 			//응답 형태
 			//애플리케이션 등록시 제공정보 항목에 따라 차이가 있음
-			//{"resultcode":"00","message":"success","response":{"id":"55XXXXXX","gender":"M","email":"foo@naver.com"}}
+			/*
+			{
+			  "resultcode":"00",
+			  "message":"success",
+			  "response":{"id":"55XXXXXX","gender":"M","email":"foo@naver.com"}
+			}
+			*/
 			
 			JsonNode node = new ObjectMapper().readTree(response);
 			
@@ -65,13 +73,12 @@ public class OAuth2UserAttribute {
 		}
 		
 		
-		if (logger.isDebugEnabled()) {
-			logger.debug(attributes);
-		}
+//		if (logger.isDebugEnabled()) {
+//			logger.debug(attributes);
+//		}
 		
 		
-		return attributes;
-		
+		return attributes;		
 	}
 	
 

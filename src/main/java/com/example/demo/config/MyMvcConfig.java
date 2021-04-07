@@ -12,6 +12,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 public class MyMvcConfig implements WebMvcConfigurer {
 	
+	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {"classpath:/static/", "classpath:/public/"};
+
 	
 	// 정적 리소스는 보통 제한없이(로그인이 필요없는) 서비스되도록 설정한다.
 	// 정적 리소스의 디폴트 루트는 /resources/static이다. 
@@ -23,7 +25,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
 	// TODO 명확한 의미는 아직?
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {	
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");	
+		registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);	
 	}
 	
 		

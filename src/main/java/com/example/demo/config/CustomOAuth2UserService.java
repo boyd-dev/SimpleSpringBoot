@@ -24,8 +24,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.demo.controller.HomeController;
-import com.example.demo.login.OAuth2UserAttribute;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -36,14 +34,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  */
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 	
-	private static final Logger logger = LogManager.getLogger(HomeController.class);
+	private static final Logger logger = LogManager.getLogger(CustomOAuth2UserService.class);
 	
 	private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
-	
-	// 사용자 정보는 이 세가지 정보만 참조하기로 한다.
-	// key 값
-	//private static final String USER_ID = "userId";
-	
+
 	@Autowired
 	private OAuth2UserAttribute oauth2UserAttribute;
 	
@@ -90,9 +84,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 				// 리소스 서버에게 사용자 정보 요청
 				String response = restTemplate.postForObject(resourceServerUri, request, String.class);				
 				
-				if (logger.isDebugEnabled()) {
-					logger.debug(response);
-				}
+//				if (logger.isDebugEnabled()) {
+//					logger.debug(response);
+//				}
 				
 				attributes = oauth2UserAttribute.getOAuth2UserAttributes(clientRegistrationId, response);
 				

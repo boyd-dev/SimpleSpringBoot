@@ -27,8 +27,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.4.4'
     // 스프링 부트 디폴트인 logback 대신에 log4j2를 사용하기로 함
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    // java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter 오류가 나서 추가함
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    
 }
 
 
