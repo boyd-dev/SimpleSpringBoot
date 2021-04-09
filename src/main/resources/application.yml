@@ -36,6 +36,10 @@ jwt:
    secret: 12345
    expire-time: 300 #sec
 
+# 프론트엔드 애플리케이션은 어차피 SPA
+frontend-app:
+   entry: /index.html
+
 my-props:    
    name:
       point: 200
@@ -79,8 +83,11 @@ jwt:
    toekn-issuer: foo.com
    token-name: foo-app-jwt
    secret: 12345
-   expire-time: 60 #sec
+   expire-time: 300 #sec
 
+frontend-app:
+   entry: /index.html
+   
 my-props:    
    name:
       point: 200

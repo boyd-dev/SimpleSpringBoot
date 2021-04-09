@@ -32,7 +32,8 @@ public class OAuth2UserAttribute {
 	public static final String USER_EMAIL = "userEmail";
 	
 	
-	public Map<String, Object> getOAuth2UserAttributes(String registrationId, String response) throws JsonMappingException, JsonProcessingException {
+	public Map<String, Object> getOAuth2UserAttributes(String registrationId, String response) 
+			throws JsonMappingException, JsonProcessingException {
 		
 		Map<String, Object> attributes = new HashMap<>();
 		
@@ -50,7 +51,8 @@ public class OAuth2UserAttribute {
 			
 			JsonNode node = new ObjectMapper().readTree(response);
 			
-			attributes.put(USER_ID, node.get("response").get("id"));
+			//이상하게 id에 인용부호가 붙는다! 
+			attributes.put(USER_ID, node.get("response").get("id").toString().replaceAll("\"", ""));
 			attributes.put(USER_NAME, node.get("response").get("nickname"));
 			attributes.put(USER_EMAIL, node.get("response").get("email"));
 			

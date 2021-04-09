@@ -32,6 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	
 	private static final Logger logger = LogManager.getLogger(JwtAuthenticationFilter.class);
 	
+	// API 호출은 전부 JWT를 확인한다.
 	private RequestMatcher requestMatcher = new AntPathRequestMatcher("/api/**");
 
 
@@ -48,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		
-		// permitAll은 필터가 적용되지 않도록 하는 것이 아니다.
+		// permitAll이라고 해서 필터가 아예 적용되지 않도록 하는 것이 아니다. 필터는 항상 통과한다.
 		// 
 		if (requestMatcher.matches(request)) {
 			
@@ -77,13 +78,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				}			
 				
 				// JWT가 만료되었는지 확인
-				// 쿠키가 만료되는 경우는 아예 JWT가 없어졌을 것이므로 이전 조건에서 검사할 것이다.
+				//TODO 쿠키가 만료되는 경우는 아예 JWT가 없어졌을 것이므로 이 조건이 필요가 있을까?
 				if (jwtUtils.isTokenExpired(jwt)) {
 					if (logger.isDebugEnabled()) {
 						logger.debug("JWT is expired");		
 					}
-					response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-					
+					response.setStatus(HttpServletResponse.SC_FORBIDDEN);					
 				}
 					
 				Map<String, Object> attributes = jwtUtils.getBobyFromToken(jwt);
@@ -97,7 +97,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				// 결과적으로 처음 인증 공급자로부터 받은 정보를 JWT에 넣었고 쿠키를 통해 다시 받으면 
 				// 그것을 OAuth2User로 다시 복원해서 시큐리티의 인증정보에 넣어야 시큐리티의 필터들을 통과할 수 있다. 
 
-				//
+				// JWT를 만들 때 사용자 고유 ID로 삼았던 필드명과 맞춘다.
 				String userNameAttributeName = "sub";
 				
 				//TODO
@@ -109,9 +109,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				OAuth2AuthenticationToken authentication = new OAuth2AuthenticationToken(userDetails, authorities, userNameAttributeName);
                 
 				authentication.setDetails(userDetails);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                
-                
+                SecurityContextHolder.getContext().setAuthentication(authentication); 
 			}
 			
 	     }		

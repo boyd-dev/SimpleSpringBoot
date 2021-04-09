@@ -48,12 +48,12 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
 			logger.debug(authentication.getPrincipal());
 		}
 		
-		// 프론트엔드 애플리케이션은 어차피 SPA
-		String frontendAppEntryPage = "/index.html";
+		
+		String frontendAppEntryPage = env.getProperty("frontend-app.entry");
 				
 		String jwt = jwtUtils.generateToken((DefaultOAuth2User) authentication.getPrincipal());
 		
-		//TODO 고유 ID와 권한을 DB에 저장하는 것이 어떨지? 권한은 리스트형
+		//TODO 고유 ID와 권한을 DB에 저장하는 것이 어떨지? 권한은 리스트형이다.
 		// 
 		//authentication.getAuthorities()
 		
@@ -61,7 +61,7 @@ public class CustomOAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHa
 		// JWT 토큰을 생성하여 쿠키에 저장
 		response.addCookie(cookieUtils.generateJwtHttpOnlyCookie(env.getProperty("jwt.token-name"), jwt, Integer.valueOf(env.getProperty("jwt.expire-time")).intValue()));
 		
-		// TODO HttpOnly=false인 쿠키가 필요하다?
+		//TODO HttpOnly=false인 쿠키가 필요하다?
 		response.addCookie(cookieUtils.generateNormalCookie(env.getProperty("jwt.token-name") + "-flag", "true", Integer.valueOf(env.getProperty("jwt.expire-time")).intValue()));
 		
 		if (response.isCommitted()) {
