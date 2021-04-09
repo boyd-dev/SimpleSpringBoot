@@ -52,7 +52,7 @@
    JWT에서는 세션을 이용하지 않으므로 `.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)`으로 설정합니다. 그러나 세션 자체는 생성됩니다.
    
              
-   Security의 기본 설정을 변경하므로 직접 구현해 주여야 하는 핸들러들이 있습니다. 특히 다수의 OAuth2 공급자를 이용할 수 있으므로(예를 들어 구글과 네이버), 각 공급자로 부터 
+   Security의 기본 설정을 변경하므로 직접 구현해 주여야 하는 핸들러들이 있습니다. 특히 다수의 OAuth2 공급자를 이용할 수 있으므로(예를 들어 구글, 페이스북, 네이버 등), 각 공급자로 부터 
    전달받은 사용자 정보를 통일된 사용자 객체로 만들어줄 필요가 있습니다. 그래서 `.userInfoEndpoint().userService(customOAuth2UserService())` 처럼 커스터마이징을 할 필요가 있습니다.
    
    
@@ -61,11 +61,11 @@
    
    
    프론트엔드에서 백엔드의 인증/권한을 받았다는 것을 인식해야 하는데 쿠키를 읽지 못하도록 했기 때문에 `HttpOnly=false`인 쿠키 하나를 더 
-   전송하도록 합니다. 이 쿠키는 사용자 정보를 가지고 있지 않고 다만 JWT를 받았는지 여부(플래그)만 가지고 있습니다. 
+   전송하도록 합니다. 이 쿠키는 사용자 정보를 가지고 있지 않고 다만 JWT를 수신했는지 여부만을 표시합니다. 
    
    <img src="https://github.com/kate-foo/SimpleSpringBoot/blob/oauth2-jwt/cookie.PNG"/>
    
-   아래는 react.js를 사용한 프론트엔드 코드의 예시입니다. 백엔드 API 호출을 위해 `axios` 라이브러리를 사용했습니다. 
+   아래는 react.js를 사용한 프론트엔드 코드의 예시입니다(전체 프로젝트는 [여기](https://github.com/kate-foo/SimpleReactApp)). 백엔드 API 호출을 위해 `axios` 라이브러리를 사용했습니다. 
    `signIn` 여부는 JWT 수신 플래그 쿠키 `foo-app-jwt-flag`에 의해서만 true가 됩니다. 
    그리고 다시 `/api/hello/`를 통해 사용자의 `nickname`을 가져오는 형태입니다.
    
