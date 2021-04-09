@@ -66,8 +66,8 @@
    
    <img src="https://github.com/kate-foo/SimpleSpringBoot/blob/oauth2-jwt/cookie.PNG"/>
    
-   아래는 react.js를 사용한 프론트엔드 코드의 예시입니다. 백엔드 API 호출을 위해 `axios` 라이브러리를 사용했습니다. `signIn` 여부만을 체크하고 
-   다시 `/api/hello/`를 통해 사용자의 `nickname`을 가져오게 됩니다. 
+   아래는 react.js를 사용한 프론트엔드 코드의 예시입니다. 백엔드 API 호출을 위해 `axios` 라이브러리를 사용했습니다. `signIn` 여부는 JWT 수신 플래그 쿠기 `foo-app-jwt-flag`에 의해서만 true가 됩니다. 
+   그리고 다시 `/api/hello/`를 통해 사용자의 `nickname`을 가져오게 됩니다. 
    
    ```
     const [signIn, setSignIn] = useState(false);
