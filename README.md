@@ -102,9 +102,9 @@
    
    ```
    private RequestMatcher requestMatcher = new AntPathRequestMatcher("/api/**");
-   ...
+   
    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         
         if (requestMatcher.matches(request)) {
