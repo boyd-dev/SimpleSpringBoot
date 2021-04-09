@@ -91,6 +91,7 @@ The motivation for using the name 'bean', as opposed to 'component' or 'object' 
 * 다른 브랜치     
    - 스프링 부트 웹 애플리케이션 [webapp](https://github.com/kate-foo/SimpleSpringBoot/tree/webapp)  
    - 스프링 부트 OAuth2 적용 [oauth2](https://github.com/kate-foo/SimpleSpringBoot/tree/oauth2)
+   - 스프링 부트 OAuth2+JWT 적용 [oauth2-jwt](https://github.com/kate-foo/SimpleSpringBoot/tree/oauth2-jwt)
    
    
    
