@@ -100,6 +100,18 @@
    
    <b>JWT 필터가 추가되면 `permitAll`로 설정값들이 기존의 Security 필터 체인은 통과하지만 JWT 필터는 통과하지 못하게 되므로 문제가 발생합니다. 그래서 JWT 필터는 특정 URL에 대해서만 적용될 수 있도록 해야 합니다.</b>
    
+   ```
+   private RequestMatcher requestMatcher = new AntPathRequestMatcher("/api/**");
+   ...
+   @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+        
+        if (requestMatcher.matches(request)) {
+        
+        ...
+   ```
+   
    벡엔드의 컨트롤러에서 사용자 정보를 참조하려면 `SecurityContextHolder`를 사용합니다. 예를 들어 다음과 같이 사용할 수 있겠습니다.
          
    ```
