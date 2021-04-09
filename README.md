@@ -57,7 +57,7 @@
    
    
    이렇게 만들어진 사용자 정보를 가지고 JWT를 만들어주는 일은 `.successHandler(customOAuth2SuccessHandler)`에서 수행합니다. 자동 설정된 핸들러를 사용할 수 없으므로 `customOAuth2SuccessHandler`에서 JWT를 만들어서 
-   웹 브라우저에 쿠키를 저장합니다. JWT를 저장하는 쿠키는 프론트엔드의 자바스크립트가 읽을 수 없도록 `HttpOnly` 쿠키로 저장합니다. 
+   웹 브라우저로 쿠키를 보냅니다. JWT를 저장하는 쿠키는 프론트엔드의 자바스크립트가 읽을 수 없도록 `HttpOnly` 쿠키로 저장합니다. 
    
    
    프론트엔드에서 백엔드의 인증/권한을 받았다는 것을 인식해야 하는데 쿠키를 읽지 못하도록 했기 때문에 `HttpOnly=false`인 쿠키 하나를 더 
