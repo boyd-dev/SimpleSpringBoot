@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-
 import com.example.demo.filter.JwtAuthenticationFilter;
 
 @Configuration
@@ -38,10 +37,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		     .antMatchers("/index.html").permitAll()
 		     .antMatchers("/static/**").permitAll() // 리액트 애플리케이션에도 static 폴더가 생기므로 허용한다.
 		     .antMatchers("/oauth2Login").permitAll()
-		     //.antMatchers("/api/**").permitAll()
 		     .anyRequest().authenticated()
 		     .and()
-		     .csrf().disable() // 활성화하면 로그아웃시 POST 메소드로 해야 한다!
+		 .csrf().disable() // 활성화하면 로그아웃시 POST 메소드로 해야 한다!
 		 .oauth2Login()
 		    .loginPage("/oauth2Login")
 		       .redirectionEndpoint()
@@ -58,7 +56,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		       .deleteCookies("JSESSIONID")
 		       .logoutSuccessHandler(customLogoutSuccessHandler)
 		       .and()		    
-		   //TODO 필터의 위치는 어떻게 결정하지?
+		   //TODO 필터의 위치는 어떻게 결정하지?		       
 		  .addFilterBefore(jwtAuthenticationFilter(), OAuth2AuthorizationRequestRedirectFilter.class); 
 		  
 	}

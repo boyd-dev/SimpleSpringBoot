@@ -13,13 +13,20 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * OAuth2의 인증 공급자로부터 취득한 사용자 정보를 다시 애플리케이션의 목적에 맞도록 구성 
+ * 사용자 정보는 다음 세가지 정보만 보유하기로 한다.
+ * userId, userName, userEmail
+ * 
+ * @author kate
+ *
+ */
 @Component
 public class OAuth2UserAttribute {
 	
 	private static final Logger logger = LogManager.getLogger(OAuth2UserAttribute.class);
 	
-	// 사용자 정보는 이 세가지 정보만 참조하기로 한다.
-	// key 값
+	// TODO 권한정보는?
 	public static final String USER_ID = "userId";
 	public static final String USER_NAME = "userName";
 	public static final String USER_EMAIL = "userEmail";

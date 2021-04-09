@@ -37,12 +37,13 @@ public class JwtUtils {
     }
 
     // 토큰 만료 검사
-    public Boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
     	try {
 	    	long exp = (Long) getBobyFromToken(token).get("exp");
 	        final Date expiration = new Date(exp);
 	        
 	        return expiration.before(new Date());
+	        
     	}catch (Exception e) {
 			return false;
 		}
@@ -65,9 +66,6 @@ public class JwtUtils {
     		claim.put("email", ((DefaultOAuth2User) userDetails).getAttributes().get("userEmail"));
     		claim.put("nickname", ((DefaultOAuth2User) userDetails).getAttributes().get("userName"));
     		
-    		// TODO 권한은 리스트형인데?
-    		//claim.put("roles", ((DefaultOAuth2User) userDetails).getAuthorities().toString());    		
-    		
     	} 
     	//TODO 다른 타입의 사용자 정보의 경우는 나중에 생각해보자.
     	// else if () {}
@@ -89,6 +87,8 @@ public class JwtUtils {
 		String secret = env.getProperty("jwt.secret");
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
+    
+    
     
 
 }

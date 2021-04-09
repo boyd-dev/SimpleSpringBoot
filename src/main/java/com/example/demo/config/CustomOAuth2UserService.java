@@ -29,14 +29,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService 를 참조하여 작성
- * @author song
+ * @author kate
  *
  */
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 	
 	private static final Logger logger = LogManager.getLogger(CustomOAuth2UserService.class);
 	
-	private static final String MISSING_USER_INFO_URI_ERROR_CODE = "missing_user_info_uri";
+	private static final String MISSING_USER_INFO_ERROR_CODE = "missing_redirect_uri_access_code";
 
 	@Autowired
 	private OAuth2UserAttribute oauth2UserAttribute;
@@ -84,10 +84,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 				// 리소스 서버에게 사용자 정보 요청
 				String response = restTemplate.postForObject(resourceServerUri, request, String.class);				
 				
-//				if (logger.isDebugEnabled()) {
-//					logger.debug(response);
-//				}
+				if (logger.isDebugEnabled()) {
+					logger.debug(response);
+				}
 				
+				//TODO 권한 정보도 넘겨야 할듯?
 				attributes = oauth2UserAttribute.getOAuth2UserAttributes(clientRegistrationId, response);
 				
 			} catch (OAuth2AuthorizationException ex) {				
@@ -106,8 +107,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 			user = new DefaultOAuth2User(authorities, attributes, userNameAttributeName);
 			
 		} else {
-			OAuth2Error oauth2Error = new OAuth2Error(MISSING_USER_INFO_URI_ERROR_CODE,
-					"Missing required UserInfo Uri in UserInfoEndpoint for Client Registration: "
+			OAuth2Error oauth2Error = new OAuth2Error(MISSING_USER_INFO_ERROR_CODE,
+					"Missing required redirect uri or access token for Client Registration: "
 							+ userRequest.getClientRegistration().getRegistrationId(),
 					null);
 			throw new OAuth2AuthenticationException(oauth2Error, oauth2Error.toString());

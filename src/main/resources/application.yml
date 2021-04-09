@@ -34,7 +34,7 @@ jwt:
    toekn-issuer: foo.com
    token-name: foo-app-jwt
    secret: 12345
-   expire-time: 60 #sec
+   expire-time: 300 #sec
 
 my-props:    
    name:
