@@ -1,39 +1,69 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.3'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.4.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.github.node-gradle.node' version '3.0.1'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+
+
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.4.4'
+    /*
+    implementation ('org.springframework.boot:spring-boot-starter-web:2.4.4') {
+        exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging' 
+    } 
+    */   
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.4.4'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.4.4'
+    // 스프링 부트 디폴트인 logback 대신에 log4j2를 사용하기로 함
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    // java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter 오류가 나서 추가함
+    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    
 }
 
 
-// 스프링 부트에서는 Jar 태스크는 bootJar
-bootJar {    
-    archiveFileName = 'demo-app-0.0.1.jar'        
+configurations.all {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'    
 }
+
 
 test {
-	useJUnitPlatform()
-	testLogging {
-	    showStackTraces = true
-	    exceptionFormat = 'full'
-	}
+    useJUnitPlatform()
 }
 
 
 
-//defaultTasks 'clean', 'bootJar'
+// 프론트엔드 애플리케이션 프로젝트의 경로
+def frontendDir = "C:/Users/song/myapp"
 
+// 빌드된 프론트엔드 애플리케이션을 스프링 부트 정적 리소스 디렉토리로 복사
+task copyFrontend(type: Copy) {
+    from "$frontendDir/build"
+    into "$projectDir/src/main/resources/static"       
+}
+
+// node-gradle 플러그인이 제공하는 yarn_build 태스크를 실행하고 copyFrontend 태스크를 그 다음에 실행
+copyFrontend.dependsOn(yarn_build)
+
+// copyFrontend 태스트가 실행된 다음에 자바 소스를 컴파일
+compileJava.dependsOn(copyFrontend)
+
+// node-gradle 플러그인 설정 
+node {
+    nodeProjectDir = file("$frontendDir")
+}
 

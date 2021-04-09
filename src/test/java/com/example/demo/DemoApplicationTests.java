@@ -1,25 +1,23 @@
 package com.example.demo;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.demo.controller.HomeController;
 
 @SpringBootTest
 class DemoApplicationTests {
+
+	@Autowired
+	private HomeController controller;
 	
-	 @Autowired
-	 @Qualifier("helloWorldService")
-	 private IHelloWorldService helloWorld;
-	
-	 
 	@Test
-	void contextLoads() {
-		assertThat(helloWorld.sayHello()).isEqualTo("Hey, World! from HelloWorldService bean");
-		 
+	void contextLoads() {		
+		assertThat(controller).isNotNull();
+
 	}
 
 }
