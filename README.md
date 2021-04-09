@@ -61,13 +61,13 @@
    
    
    프론트엔드에서 백엔드의 인증/권한을 받았다는 것을 인식해야 하는데 쿠키를 읽지 못하도록 했기 때문에 `HttpOnly=false`인 쿠키 하나를 더 
-   전송하도록 합니다. 이 쿠키는 사용자 정보를 가지고 있지 않고 다만 JWT를 받았는지 여부(플래그)만 가지고 있습니다. 그리고 프론트엔드 애플리케이션에서 
-   사용자 정보를 표시하기 위해서 즉시 API 호출을 수행합니다.   
+   전송하도록 합니다. 이 쿠키는 사용자 정보를 가지고 있지 않고 다만 JWT를 받았는지 여부(플래그)만 가지고 있습니다. 
    
    <img src="https://github.com/kate-foo/SimpleSpringBoot/blob/oauth2-jwt/cookie.PNG"/>
    
-   아래는 react.js를 사용한 프론트엔드 코드의 예시입니다. 백엔드 API 호출을 위해 `axios` 라이브러리를 사용했습니다. `signIn` 여부는 JWT 수신 플래그 쿠기 `foo-app-jwt-flag`에 의해서만 true가 됩니다. 
-   그리고 다시 `/api/hello/`를 통해 사용자의 `nickname`을 가져오게 됩니다. 
+   아래는 react.js를 사용한 프론트엔드 코드의 예시입니다. 백엔드 API 호출을 위해 `axios` 라이브러리를 사용했습니다. 
+   `signIn` 여부는 JWT 수신 플래그 쿠키 `foo-app-jwt-flag`에 의해서만 true가 됩니다. 
+   그리고 다시 `/api/hello/`를 통해 사용자의 `nickname`을 가져오는 형태입니다.
    
    ```
     const [signIn, setSignIn] = useState(false);
@@ -118,10 +118,7 @@
    if (!principal.getName().isEmpty()) {
         OAuth2User user = (OAuth2User) SecurityContextHolder.getContext().getAuthentication().getDetails();
         nickname = user.getAttribute("nickname").toString();
-            
-        if (logger.isDebugEnabled()) {
-            logger.debug(nickname);
-        }       
+        ...
    }       
    ```  
    
