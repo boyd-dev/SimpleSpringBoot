@@ -14,10 +14,10 @@ JWT를 쿠키에 저장하게 되면 웹 브라우저의 모든 요청에 포함
    
    ```
    #back-end
-   https://github.com/boyd-dev/SimpleSpringBoot.git
+   git clone https://github.com/boyd-dev/SimpleSpringBoot.git
    
    #front-end
-   https://github.com/boyd-dev/SimpleReactApp.git
+   git clone https://github.com/boyd-dev/SimpleReactApp.git
    ```  
 
 2. 프로젝트명 변경하기  
