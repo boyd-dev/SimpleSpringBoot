@@ -92,7 +92,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 					logger.debug("JWT::" + attributes);					
 				}
 				
-				//TODO 
+				
 				// JWT로부터 사용자 정보를 추출하여 인증 정보를 만든 후 SecurityContext에 넣는다.
 				// 결과적으로 처음 인증 공급자로부터 받은 정보를 JWT에 넣었고 쿠키를 통해 다시 받으면 
 				// 그것을 OAuth2User로 다시 복원해서 시큐리티의 인증정보에 넣어야 시큐리티의 필터들을 통과할 수 있다. 

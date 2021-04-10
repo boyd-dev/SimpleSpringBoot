@@ -33,13 +33,12 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		 http
 		 .authorizeRequests()
-		     // 첫번째로 만나는 패턴이 일치하면 적용된다.
 		     .antMatchers("/index.html").permitAll()
-		     .antMatchers("/static/**").permitAll() // 리액트 애플리케이션에도 static 폴더가 생기므로 허용한다.
+		     .antMatchers("/static/**").permitAll()
 		     .antMatchers("/oauth2Login").permitAll()
 		     .anyRequest().authenticated()
 		     .and()
-		 .csrf().disable() // 활성화하면 로그아웃시 POST 메소드로 해야 한다!
+		 .csrf().disable()
 		 .oauth2Login()
 		    .loginPage("/oauth2Login")
 		       .redirectionEndpoint()
@@ -55,8 +54,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		    .logout()
 		       .deleteCookies("JSESSIONID")
 		       .logoutSuccessHandler(customLogoutSuccessHandler)
-		       .and()		    
-		   //TODO 필터의 위치는 어떻게 결정하지?		       
+		       .and()
 		  .addFilterBefore(jwtAuthenticationFilter(), OAuth2AuthorizationRequestRedirectFilter.class); 
 		  
 	}
@@ -72,7 +70,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		    .roles("USER");
 	}
 	
-	// 이렇게 빈을 명시적으로 등록해보자!
 	@Bean
 	public OAuth2UserService<OAuth2UserRequest, OAuth2User> customOAuth2UserService() {		
 		return new CustomOAuth2UserService();

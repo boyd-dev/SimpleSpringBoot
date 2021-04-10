@@ -1,3 +1,4 @@
+#Local
 spring: 
    config:
       activate:
@@ -8,14 +9,14 @@ spring:
          client:
             registration:
                google:
-                  client-id: 745290466201-s3hds5obh1o6mamhdb8blcop3a87v5i0.apps.googleusercontent.com
-                  client-secret: pwQvJae56hmtM_d6PnXTKIk_
+                  client-id: <Your client-id>
+                  client-secret: <Your client-secret>
                   scope: profile, email
                   redirect-uri: http://localhost:8080/oauth2/callback/google
                   client-name: google                           
                naver:
-                  client-id: LSB9C9lp5mhsmE4sXORv
-                  client-secret: dEmml1QMIh
+                  client-id: <Your client-id>
+                  client-secret: <Your client-secret>
                   redirect-uri: http://localhost:8080/oauth2/callback/naver
                   authorization-grant-type: authorization_code
                   client-name: naver
@@ -46,6 +47,7 @@ my-props:
 
 ---
 
+#Production
 spring: 
    config:
       activate:
@@ -57,15 +59,15 @@ spring:
          client:
             registration:
                google:
-                  client-id: 745290466201-s3hds5obh1o6mamhdb8blcop3a87v5i0.apps.googleusercontent.com
-                  client-secret: pwQvJae56hmtM_d6PnXTKIk_
+                  client-id: 
+                  client-secret: 
                   scope: profile
-                  redirect-uri: http://www.foo.com/oauth2/callback/google
+                  redirect-uri: 
                   client-name: google                           
                naver:
-                  client-id: LSB9C9lp5mhsmE4sXORv
-                  client-secret: dEmml1QMIh 
-                  redirect-uri: http://www.foo.com/oauth2/callback/naver
+                  client-id: 
+                  client-secret:  
+                  redirect-uri: 
                   authorization-grant-type: authorization_code
                   client-name: naver
             provider:
