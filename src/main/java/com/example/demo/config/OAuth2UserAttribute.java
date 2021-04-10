@@ -51,7 +51,6 @@ public class OAuth2UserAttribute {
 			
 			JsonNode node = new ObjectMapper().readTree(response);
 			
-			//이상하게 id에 인용부호가 붙는다! 
 			attributes.put(USER_ID, node.get("response").get("id").toString().replaceAll("\"", ""));
 			attributes.put(USER_NAME, node.get("response").get("nickname"));
 			attributes.put(USER_EMAIL, node.get("response").get("email"));
