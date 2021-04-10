@@ -20,7 +20,7 @@
    ```     
    
 3. 이클립스에서 프로젝트 import 하기  
-   이클립스 메뉴 File > Import > Gradle > Existing Gradle Porject를 실행합니다. Project root directory를 git clone으로 가져온 디렉토리로 지정합니다.
+   이클립스 메뉴 File>Import>Gradle>Existing Gradle Porject를 실행합니다. Project root directory를 git clone으로 가져온 디렉토리로 지정합니다.
    가져오기가 완료되면 이클립스에 프로젝트 탐색기에서 `demo-jwt`를 확인합니다. 
       
 
@@ -52,14 +52,17 @@
    
    ```  
 
-6. 빌드하기  
+6. 빌드하기
+   프로젝트 탐색창에서 `demo-jwt`를 선택하고 마우스 오른쪽 클릭하여 Gradle>Refresh Gradle Project를 실행하여 라이브러리들을 받습니다. 
+   
+     
    이클립스 메뉴 Window>Show View>Gradle>Gradle Tasks를 오픈합니다. 트리에서 `build` 폴더를 열어서 `build` 항목을 선택하고 마우스 오른쪽 클릭하여 `Run Gradle Tasks`를 실행합니다.
     
 
-7. 정적 리소스 확인하기
+7. 정적 리소스 확인하기  
    빌드를 통해 프론트엔드 애플리케이션도 함께 빌드되어 `/resources/static/` 하위에 생성됩니다. 해당 폴더를 열어서(F5로 리프레시 후) 확인합니다. 
 
-8. 스프링 부트 애플리케이션 실행
+8. 스프링 부트 애플리케이션 실행  
    `Boot Dashboard`에서 해당 프로젝트를 선택한 후 실행합니다. 웹 브라우저에서 `http://localhost:8080`에 접속하여 동작을 확인합니다.
 
       
