@@ -1,23 +1,23 @@
-스프링 부트, 스프링 시큐리티, OAuth2를 기반으로 JWT 로그인을 구현한 예제입니다. 구글과 네이버 로그인 기능만이 구현되어 있습니다.
+스프링 부트, 스프링 시큐리티, OAuth2를 기반으로 JWT 로그인을 구현한 예제입니다. 구글과 네이버 로그인 기능만이 구현되어 있습니다. 
+JWT 유효시간은 300초로 설정되었고 자동 재로그인이나 권한 부분은 구현되어 있지 않습니다.
 
 ## 구현 내용
 
 OAuth2의 인증 결과를 세션에 저장하는 대신 JWT 토큰을 생성하고 쿠키를 통해 사용자 에이전트(웹 브라우저)에 전송합니다. 
-JWT를 쿠키에 저장하게 되면 웹 브라우저의 모든 요청에 포함되어 서버에 전달되고 서버는 JWT를 확인하여 해당 사용자의 인증/권한 정보에 
-따라 서비스를 제공할 수 있습니다.
+JWT를 쿠키에 저장하게 되면 웹 브라우저의 모든 요청에 포함되어 API 서버에 전달되고 서버는 JWT를 확인하여 해당 사용자의 요청을 처리할 수 있습니다.
 
 
 ## 실행 방법
  
 1. 레포지토리에서 소스파일 받기  
-  깃허브 레포지토리에서 소스파일을 받습니다. 백엔드는 스프링 부트, 프론트엔드는 react.js로 작성되어 있습니다.
+  깃허브 레포지토리에서 소스파일을 받습니다. 백엔드는 스프링 부트, 프론트엔드는 react.js로 작성되어 있습니다. 프론트엔드 프로젝트는 [여기](https://github.com/boyd-dev/SimpleReactApp.git)를 참고하십시오.
    
    ```
    #back-end
    https://github.com/boyd-dev/SimpleSpringBoot.git
    
    #front-end
-   https://github.com/kate-foo/SimpleReactApp.git
+   https://github.com/boyd-dev/SimpleReactApp.git
    ```  
 
 2. 프로젝트명 변경하기  
@@ -29,7 +29,7 @@ JWT를 쿠키에 저장하게 되면 웹 브라우저의 모든 요청에 포함
    ```     
    
 3. 이클립스에서 프로젝트 import 하기  
-   이클립스 메뉴 File>Import>Gradle>Existing Gradle Porject를 실행합니다. Project root directory를 git clone으로 가져온 디렉토리로 지정합니다.
+   이클립스 메뉴 File>Import>Gradle>Existing Gradle Porject를 실행합니다. Project root directory를 git clone으로 가져온 스프링 부트 프로젝트 디렉토리로 지정합니다.
    가져오기가 완료되면 이클립스에 프로젝트 탐색기에서 `demo-jwt`를 확인합니다. 
       
 
