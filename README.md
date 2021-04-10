@@ -45,7 +45,7 @@ JWT를 쿠키에 저장하게 되면 웹 브라우저의 모든 요청에 포함
         scope: profile, email
         redirect-uri: http://localhost:8080/oauth2/callback/google
         client-name: google                           
-     naver:
+    naver:
         client-id: <Your client-id>
         client-secret: <Your client-secret>
         redirect-uri: http://localhost:8080/oauth2/callback/naver
