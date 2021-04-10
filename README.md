@@ -65,4 +65,4 @@
 8. 스프링 부트 애플리케이션 실행  
    `Boot Dashboard`에서 해당 프로젝트를 선택한 후 실행합니다. 웹 브라우저에서 `http://localhost:8080`에 접속하여 동작을 확인합니다.
 
-      
+   <img src="https://github.com/boyd-dev/SimpleSpringBoot/blob/main/demo-jwt.PNG"/>   
