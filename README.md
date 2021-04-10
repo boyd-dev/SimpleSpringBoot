@@ -5,10 +5,10 @@
    
    ```
    #back-end
-   git clone
+   https://github.com/boyd-dev/SimpleSpringBoot.git
    
    #front-end
-   git clone
+   https://github.com/kate-foo/SimpleReactApp.git
    ```  
 
 2. 프로젝트명 변경하기  
